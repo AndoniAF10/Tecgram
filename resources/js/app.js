@@ -11,3 +11,9 @@ const dropzone = new Dropzone('#dropzone',
     uploadMultiple:false,
 
 });
+
+dropzone.on('success', function(file,response)
+{
+    console.log(response);
+//alert("la imagen se cargo correctamente");
+});
