@@ -10,10 +10,31 @@ const dropzone = new Dropzone('#dropzone',
     maxFiles:1,
     uploadMultiple:false,
 
+    init:function()
+    {
+        if(document.querySelector('[name="imagen"]').value.trim())
+        {
+            const imagenPublicada = {};
+            imagenPublicada.size = 1234;
+            imagenPublicada.name = document.querySelector('[name="imagen"]').value.trim();
+            this.options.addedfile.call(this, imagenPublicada);
+            this.options.thumbnail.call(this, imagenPublicada,`/uploads/${imagenPublicada.name}`);
+
+            imagenPublicada.previewElement.classList.add(
+            "dz-success",
+            "dz-complete"
+            );
+        }
+    }
+
+});
+
+dropzone.on('removedfiles', function()
+{
+    document.querySelector('[name="imagen"]').value = "";
 });
 
 dropzone.on('success', function(file,response)
 {
-    console.log(response);
-//alert("la imagen se cargo correctamente");
-});
+    document.querySelector('[name="imagen"]').value = response.imagen;
+})

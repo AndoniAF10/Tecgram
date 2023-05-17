@@ -17,7 +17,7 @@ Crear nueva publicación
     
     </div>
     <div class="md:w-1/2 px-10 w-4/12 bg-blue-900 p-6 rounded-lg shadow-xl">
-        <form action="{{route('cuenta.store')}}" method="POST">
+        <form action="{{route('muro.store')}}" method="POST">
             @csrf
            <div class="mb-5">
             <label class="mb-2 block text-white font-bold uppercase" for="titulo">Título</label>
@@ -39,6 +39,12 @@ Crear nueva publicación
            @error('descripcion')
             <p class="text-red-600 text-center mb-2"> {{$message}}</p>
            @enderror
+           <div class="mb-5">
+            <input type="hidden" name='imagen' value="{{old('imagen')}}">
+            @error('imagen')
+                <p class="text-red-700 my-2">{{$message}}</p>
+            @enderror
+           </div>
            
 
            <input class="bg-sky-600 text-white p-2 w-full rounded-lg font-bold hover:bg-sky-900 cursor-pointer" type="submit" value="Publicar">
